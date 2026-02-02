@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../src/helpers/auth.php";
+require_once __DIR__ . "/../helpers/auth.php";
 requireLogin();
 ?>
 
