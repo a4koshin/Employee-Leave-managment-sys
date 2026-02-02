@@ -16,7 +16,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: employee-leave
+      MYSQL_DATABASE: leave_system
       MYSQL_USER: employee
       MYSQL_PASSWORD: password
     ports:
