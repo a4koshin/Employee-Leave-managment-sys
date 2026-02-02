@@ -5,7 +5,7 @@ requireLogin();
 
 $user = $_SESSION['user'];
 if ($user['role'] !== 'employee') {
-    header("Location: /dashboard.php");
+    header("Location: /admin/requests.php");
     exit;
 }
 
