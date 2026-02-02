@@ -50,30 +50,81 @@ function badgeClass($status) {
   <title>Admin - Manage Requests</title>
 
   <style>
-    .sidebar { width: 260px; min-height: 100vh; position: sticky; top: 0; }
+    :root {
+      --ink: #0f172a;
+      --muted: #64748b;
+      --brand: #0f766e;
+      --surface: #ffffff;
+      --bg: #f4f6fb;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Manrope", system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: 100vh;
+      position: sticky;
+      top: 0;
+      background: #0b1f2a;
+      color: #e2e8f0;
+    }
+
+    .sidebar .nav-link {
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .sidebar .nav-link.active,
+    .sidebar .nav-link:hover {
+      background: rgba(15, 118, 110, 0.35);
+      color: #fff;
+    }
+
+    .card-glass {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      border-radius: 16px;
+    }
+
+    .btn-sidebar {
+      background: #0b1f2a;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-sidebar:hover {
+      background: #0a2a37;
+      color: #fff;
+    }
   </style>
 </head>
 
-<body class="bg-light">
+<body>
 <div class="d-flex">
 
   <!-- Sidebar -->
-  <aside class="sidebar bg-white border-end p-3">
-    <div class="mb-4">
-      <div class="fw-bold fs-5">Employee Leave System</div>
-      <div class="text-muted small">Admin Panel</div>
-    </div>
-
-    <div class="mb-3 p-3 bg-light rounded">
-      <div class="fw-semibold"><?= htmlspecialchars($user['fullname']) ?></div>
-      <div class="text-muted small"><?= htmlspecialchars($user['email']) ?></div>
+  <aside class="sidebar p-3">
+    <div class="mb-3 p-3 rounded" style="background: rgba(255,255,255,0.08);">
+      <div class="fw-bold fs-5 text-white">Employee Leave System</div>
+      <div class="small text-white-50 mb-3">Admin Panel</div>
+      <div class="fw-semibold text-white"><?= htmlspecialchars($user['fullname']) ?></div>
+      <div class="small text-white-50"><?= htmlspecialchars($user['email']) ?></div>
       <span class="badge text-bg-warning mt-2">admin</span>
     </div>
 
-    <nav class="nav flex-column nav-pills gap-1">
+    <nav class="nav flex-column nav-pills gap-1" style="height: calc(100vh - 220px);">
       <a class="nav-link active" href="/admin/requests.php">Manage Requests</a>
-      <hr class="my-3">
-      <a class="nav-link text-danger" href="/logout.php">Logout</a>
+      <a class="nav-link" href="/admin/employees.php">Employees</a>
+      <div class="mt-auto">
+        <hr class="my-3 border-secondary">
+        <a class="nav-link text-danger" href="/logout.php">Logout</a>
+      </div>
     </nav>
   </aside>
 
@@ -93,11 +144,10 @@ function badgeClass($status) {
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
       <?php endif; ?>
 
-      <div class="card shadow-sm">
-        <div class="card-body">
+      <div class="card-glass p-3">
 
           <div class="table-responsive">
-            <table class="table table-hover align-middle">
+            <table class="table table-hover align-middle mb-0">
               <thead>
                 <tr>
                   <th>#</th>
