@@ -39,35 +39,80 @@ $error = $_GET['error'] ?? '';
     <title>My Leave Requests</title>
 
     <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #64748b;
+            --brand: #0f766e;
+            --surface: #ffffff;
+            --bg: #f4f6fb;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Manrope", system-ui, -apple-system, Segoe UI, sans-serif;
+        }
+
         .sidebar {
             width: 260px;
             min-height: 100vh;
             position: sticky;
             top: 0;
+            background: #0b1f2a;
+            color: #e2e8f0;
+        }
+
+        .sidebar .nav-link {
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: rgba(15, 118, 110, 0.35);
+            color: #fff;
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            border-radius: 16px;
+        }
+
+        .btn-sidebar {
+            background: #0b1f2a;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-sidebar:hover {
+            background: #0a2a37;
+            color: #fff;
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
     <div class="d-flex">
 
         <!-- Sidebar (employee) -->
-        <aside class="sidebar bg-white border-end p-3">
-            <div class="mb-4">
-                <div class="fw-bold fs-5">Employee Leave System</div>
-                <div class="text-muted small">Employee</div>
-            </div>
-
-            <div class="mb-3 p-3 bg-light rounded">
-                <div class="fw-semibold"><?= htmlspecialchars($user['fullname']) ?></div>
-                <div class="text-muted small"><?= htmlspecialchars($user['email']) ?></div>
+        <aside class="sidebar p-3">
+            <div class="mb-3 p-3 rounded" style="background: rgba(255,255,255,0.08);">
+                <div class="fw-bold fs-5 text-white">Employee Leave System</div>
+                <div class="small text-white-50 mb-3">Employee</div>
+                <div class="fw-semibold text-white"><?= htmlspecialchars($user['fullname']) ?></div>
+                <div class="small text-white-50"><?= htmlspecialchars($user['email']) ?></div>
                 <span class="badge text-bg-primary mt-2"><?= htmlspecialchars($user['role']) ?></span>
             </div>
 
-            <nav class="nav flex-column nav-pills gap-1">
+            <nav class="nav flex-column nav-pills gap-1" style="height: calc(100vh - 220px);">
                 <a class="nav-link active" href="/leave/list.php">My Leave Requests</a>
-                <hr class="my-3">
-                <a class="nav-link text-danger" href="/logout.php">Logout</a>
+                <div class="mt-auto">
+                    <hr class="my-3 border-secondary">
+                    <a class="nav-link text-danger" href="/logout.php">Logout</a>
+                </div>
             </nav>
         </aside>
 
@@ -79,7 +124,7 @@ $error = $_GET['error'] ?? '';
                     <h3 class="mb-0">My Leave Requests</h3>
 
                     <!-- Button opens modal -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createLeaveModal">
+                    <button class="btn btn-sidebar" data-bs-toggle="modal" data-bs-target="#createLeaveModal">
                         + Create Leave
                     </button>
                 </div>
@@ -92,10 +137,9 @@ $error = $_GET['error'] ?? '';
                     <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
                 <?php endif; ?>
 
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
+                <div class="card-glass p-3">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -191,7 +235,7 @@ $error = $_GET['error'] ?? '';
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                    <button type="submit" class="btn btn-sidebar">Submit Request</button>
                 </div>
             </form>
         </div>
