@@ -5,7 +5,7 @@ requireLogin();
 
 $user = $_SESSION['user'];
 if ($user['role'] !== 'employee') {
-    header("Location: /dashboard.php");
+    header("Location: /admin/requests.php");
     exit;
 }
 
@@ -65,7 +65,6 @@ $error = $_GET['error'] ?? '';
             </div>
 
             <nav class="nav flex-column nav-pills gap-1">
-                <a class="nav-link" href="/dashboard.php">Home</a>
                 <a class="nav-link active" href="/leave/list.php">My Leave Requests</a>
                 <hr class="my-3">
                 <a class="nav-link text-danger" href="/logout.php">Logout</a>
@@ -105,7 +104,6 @@ $error = $_GET['error'] ?? '';
                                         <th>End</th>
                                         <th>Status</th>
                                         <th>Admin Comment</th>
-                                        <th>Created</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -138,7 +136,7 @@ $error = $_GET['error'] ?? '';
                                                 </td>
                                                 <td class="text-muted"><?= htmlspecialchars($leave['admin_comment'] ?? '') ?>
                                                 </td>
-                                                <td class="text-muted"><?= htmlspecialchars($leave['created_at']) ?></td>
+
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
