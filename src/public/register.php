@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       $stmt = $pdo->prepare(
         "INSERT INTO users (fullname, email, password, role)
-         VALUES (?, ?, ?, 'employee')"
+         VALUES (?, ?, ?, 'admin')"
       );
       $stmt->execute([$fullname, $email, $hash]);
 
