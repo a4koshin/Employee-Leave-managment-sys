@@ -17,7 +17,22 @@ function requireLogin() {
 function requireAdmin() {
   requireLogin();
   if ($_SESSION['user']['role'] !== 'admin') {
-    header("Location: /dashboard.php");
+    header("Location: /leave/list.php");
     exit;
   }
+}
+
+function redirectToRoleHome() {
+  if (!isLoggedIn()) {
+    header("Location: /login.php");
+    exit;
+  }
+
+  if ($_SESSION['user']['role'] === 'admin') {
+    header("Location: /admin/requests.php");
+    exit;
+  }
+
+  header("Location: /leave/list.php");
+  exit;
 }
